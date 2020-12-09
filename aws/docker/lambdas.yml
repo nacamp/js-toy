@@ -1,0 +1,5 @@
+gm:
+  handler: gm.handler
+  layer: gm
+index:
+  handler: index.handler
