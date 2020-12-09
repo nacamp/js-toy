@@ -1,26 +1,9 @@
 console.log('starting function');
-exports.handler = (event, context) => {
-  console.log('event:', event);
-  context.done(null, { msg: 'hello world' });
-};
+exports.handler = async (event) => // if async not exist, return value is empty.
+  ({ msg: event });
 
-exports.gmHandler = async (event, context) => {
-  const gm = require('gm');
-  const size = function () {
-    return new Promise((resolve, reject) => {
-      gm('image.png')
-        .size((err, value) => {
-          if (err) {
-            reject(err);
-          } else {
-            resolve(value);
-          }
-        });
-    });
-  };
-  context.done(null, { msg: await size() });
-};
 /*
+old style?
 context.succeed(object result)
 결과가 성공했을때 리턴해주는 함수.
 object는 json형태

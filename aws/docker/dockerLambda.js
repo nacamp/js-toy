@@ -1,3 +1,4 @@
+// https://github.com/lambci/docker-lambda
 const { spawnSync } = require('child_process');
 
 const ENV_VARS = [
