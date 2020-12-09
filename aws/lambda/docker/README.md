@@ -16,7 +16,8 @@ ex)
   [-v <layer_dir>:/opt:ro,delegated] \
   lambci/lambda:<runtime> \
   [<handler>] [<event>]
-docker run --rm -v "$PWD":/var/task:ro,delegated -v "$PWD"/opt:/opt:ro,delegated lambci/lambda:nodejs12.x index.gmHandler
+docker run --rm -v "$PWD"/gm:/var/task:ro,delegated -v "$PWD"/layers/gm:/opt:ro,delegated lambci/lambda:nodejs12.x gm.handler
+docker run --rm -v "$PWD/index":/var/task:ro,delegated   lambci/lambda:nodejs12.x index.handler
 ```
 
 
