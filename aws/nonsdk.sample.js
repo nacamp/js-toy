@@ -3,12 +3,20 @@ const aws = require('./nonSdk');
 const lambda = new aws.Lambda({
   region: 'ap-northeast-2',
 });
-// lambda.invoke({ test: 1 });
+
+// (async () => {
+//   lambda.invokeMock({ test: 1 }, (err, data) => {
+//     console.log('callback:', data);
+//   });
+//   const r = await lambda.invokeMock({ test: 1 }).promise();
+//   console.log(r);
+// })();
 
 (async () => {
-  lambda.invoke({ test: 1 }, (err, data) => {
+  const params = { FunctionName: 'index', Payload: '{"key":"value"}' };
+  lambda.invoke(params, (err, data) => {
     console.log('callback:', data);
   });
-  const r = await lambda.invoke({ test: 1 }).promise();
+  const r = await lambda.invoke(params).promise();
   console.log(r);
 })();
