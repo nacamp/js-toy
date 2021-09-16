@@ -242,7 +242,9 @@ const checkbox1Prop = {
 function drawItem(page, font, pdfWidth, pdfHeight, imageWidth, imageHeight, prop, value) {
   let deltaX = 0;
   if (prop.properties.textAlign === 'right') {
-    deltaX = prop.width - (prop.properties.fontSize * String(value).length) / 2;
+    // https://github.com/Hopding/pdf-lib/issues/432
+    deltaX = prop.width - font.widthOfTextAtSize(value, prop.properties.fontSize);
+    // deltaX = prop.width - (prop.properties.fontSize * String(value).length) / 2;
   }
 
   page.drawText(value, {
