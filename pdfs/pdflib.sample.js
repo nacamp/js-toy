@@ -16,21 +16,23 @@ const fontkit = require('@pdf-lib/fontkit');
 const fs = require('fs');
 const sizeOf = require('image-size');
 
-const createPageLinkAnnotation = (page, uri) => page.doc.context.register(
-  page.doc.context.obj({
-    Type: 'Annot',
-    Subtype: 'Link',
-    // Rect: [0, 30, 40, 230],
-    Rect: [0, 60, 70, 20],
-    Border: [0, 0, 2],
-    C: [0, 0, 1],
-    A: {
-      Type: 'Action',
-      S: 'URI',
-      URI: PDFString.of(uri),
-    },
-  }),
-);
+const createPageLinkAnnotation = (page, font, prop, uri) => {
+  const rect = [prop.x, font.heightAtSize(prop.size), prop.x + font.widthOfTextAtSize(prop.value, prop.size), prop.y];
+  return page.doc.context.register(
+    page.doc.context.obj({
+      Type: 'Annot',
+      Subtype: 'Link',
+      Rect: rect, // Rect: [20, 60, 170, 20], // [x-left, y-top, x-right, y-bottom]
+      Border: [0, 0, 2], // Border: [0, 0, 0] no-border
+      C: [0, 0, 1],
+      A: {
+        Type: 'Action',
+        S: 'URI',
+        URI: PDFString.of(uri),
+      },
+    }),
+  );
+};
 
 const text1Prop = {
   _formMasterId: '60f7dc7bd030acead36e2ad2',
@@ -362,15 +364,20 @@ async function modifyPdf() {
   // case: 링크걸기
   // https://github.com/Hopding/pdf-lib/issues/123#issuecomment-568804606
   // https://github.com/Hopding/pdf-lib/issues/555
-  firstPage.drawText('링크걸기', {
+  const linkProp = {
     x: 23,
-    y: 43,
+    y: 5,
     size: 20,
     font: nanum,
+    value: '링크걸기',
     color: rgb(0.95, 0.1, 0.1),
     // rotate: degrees(90),
-  });
-  const link = createPageLinkAnnotation(firstPage, 'https://pdf-lib.js.org/');
+  };
+  firstPage.drawText('링크걸기', linkProp);
+  console.log('nanum.properties.fontSize : ', nanum.widthOfTextAtSize('링크걸기', 20));
+  const rr = [linkProp.x, nanum.heightAtSize(linkProp.size), linkProp.x + nanum.widthOfTextAtSize('링크걸기', linkProp.size), linkProp.y];
+  console.log(JSON.stringify(rr));
+  const link = createPageLinkAnnotation(firstPage, nanum, linkProp, 'https://pdf-lib.js.org/');
   firstPage.node.set(PDFName.of('Annots'), pdfDoc.context.obj([link]));
 
   // case: 백그라운드에 이미지 추가하고 위에 텍스트 추가하가
