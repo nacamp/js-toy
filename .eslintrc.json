@@ -9,5 +9,13 @@
         "ecmaVersion": 12
     },
     "rules": {
+        "max-len": "off"
+    },
+    "globals": {
+        "describe": true,
+        "before": true,
+        "after": true,
+        "afterEach": true,
+        "it": true
     }
 }

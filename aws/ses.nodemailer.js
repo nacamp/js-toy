@@ -34,7 +34,7 @@ const demoOptions = {
   attachments: [
     { // use URL as an attachment
       filename: 'demo.pdf',
-      path: 'https://x.com/prelancer2.pdf',
+      path: 'https://x.com/prelancer2.pdf', // 'https://eformdev.s3.ap-northeast-2.amazonaws.com/upload/prelancer2.pdf'
     },
   ],
 };

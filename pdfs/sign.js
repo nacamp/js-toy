@@ -102,5 +102,5 @@ const case2 = () => {
   fs.writeFileSync('signed.pdf', pdfBuffer);
 };
 
-// case1();
-case2();
+case1();
+// case2();

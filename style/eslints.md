@@ -2,6 +2,7 @@
 https://eslint.org
 https://www.npmjs.com/package/eslint-config-airbnb
 https://tech.kakao.com/2019/12/05/make-better-use-of-eslint/
+https://velog.io/@kyusung/eslint-config-2
 ```
 #package.json
 ```
@@ -13,6 +14,7 @@ https://tech.kakao.com/2019/12/05/make-better-use-of-eslint/
 ```
 #.eslintrc.json
 ```
+globals: 해당 keyword가 없다고 나오면 이곳에 추가
 {
     "env": {
         "browser": true,
@@ -24,6 +26,13 @@ https://tech.kakao.com/2019/12/05/make-better-use-of-eslint/
         "ecmaVersion": 12
     },
     "rules": {
+    },
+    "globals": {
+        "describe": true,
+        "before": true,
+        "after": true,
+        "afterEach": true,
+        "it": true
     }
 }
 ```

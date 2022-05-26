@@ -106,4 +106,5 @@ const convert = async (inputFileName, outputFileName, width) => {
     });
   }
 };
-convert('프리랜서2장.pdf', 'page.png', 1240);
+// convert('프리랜서2장.pdf', 'page.png', 1240);
+convert('./seed/pdfa.pdf', 'page.png', 1240);
